@@ -1,0 +1,22 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h1>Edit Comment</h1>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_label(form.content) }}
+                {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                {{ form_errors(form.content) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Comment</button>
+            <a href="{{ path('app_post_show', {'id': comment.post.id}) }}" class="btn btn-outline-secondary">Cancel</a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

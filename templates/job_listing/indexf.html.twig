@@ -1,0 +1,26 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}Active Job Listings{% endblock %}
+
+{% block body %}
+    <div class="row">
+        {% for job in active_jobs %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ job.Title }}</h5>
+                        <p class="card-text"><strong>Location:</strong> {{ job.Location }}</p>
+                        <p class="card-text"><strong>Salary:</strong> {{ job.SalaryRange }}</p>
+                        <p class="card-text"><strong>Description:</strong> {{ job.Description }}</p>
+                        <a href="{{ path('job_listing_show', {'id': job.id}) }}" class="btn btn-primary">View Details</a>
+                        <a href="{{ path('job_listing_apply', {'id': job.id}) }}" class="btn btn-success">Apply</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p>No active job listings found.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

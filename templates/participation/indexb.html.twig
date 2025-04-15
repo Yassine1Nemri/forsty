@@ -1,0 +1,109 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Participation index{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display: flex; justify-content: space-between; align-items: center;">
+            <h6 class="m-0 font-weight-bold text-primary">MANAGE PARTICIPATIONS</h6>
+            
+        </div>
+
+        <div class="card-body">
+         <div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search..." id="myInput">
+            <button type="submit" class="btn btn-default btn-round btn-just-icon"></button>
+        </div>
+            <div class="table-responsive">
+                <table  id="anotherTable"  id="dataTable" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">Nom</th>
+                            <th onclick="sortTable(1)">Prenom</th>
+                            <th onclick="sortTable(2)">Tel</th>
+                            <th onclick="sortTable(3)">Date</th>
+                            <th >Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        {% for participation in participations %}
+                        <tr>
+                            <td>{{ participation.nom }}</td>
+                            <td>{{ participation.prenom }}</td>
+                            <td>{{ participation.tel }}</td>
+                            <td>{{ participation.date ? participation.date|date('Y-m-d ') : 'N/A' }}</td>
+                           <td>
+    <a href="{{ path('app_participation_showb', {'id': participation.id}) }}" class="btn btn-primary btn-icon-split">
+        <span class="text">Show</span>
+    </a>
+    {% include 'participation/_delete_formb.html.twig' with {'id': participation.id} %}
+</td>
+
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7">No records found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a  href="{{ path('excel') }}" class="btn btn-primary m-2" style="display:block ; margin-bottom: 2.5em; background-color: #00A8B3;">Générer Excel  <i class="fa fa-table" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("anotherTable");
+        switching = true;
+        dir = "asc";
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

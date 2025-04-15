@@ -1,0 +1,52 @@
+<div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addJobModalLabel">Create New Job Listing</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(add_form, { 'action': path('job_listing_new'), 'attr': { 'class': 'needs-validation', 'novalidate': 'novalidate' } }) }}
+                <div class="form-group">
+                    {{ form_label(add_form.ListingName, 'Listing Name', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.ListingName, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.Title, 'Title', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.Title, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.Location, 'Location', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.Location, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.JobType, 'Job Type', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.JobType, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.SalaryRange, 'Salary Range', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.SalaryRange, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.Description, 'Description', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.Description, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.ExperienceLevel, 'Experience Level', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.ExperienceLevel, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(add_form.Status, 'Status', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(add_form.Status, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success">Create Job</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                {{ form_end(add_form) }}
+            </div>
+        </div>
+    </div>
+</div>

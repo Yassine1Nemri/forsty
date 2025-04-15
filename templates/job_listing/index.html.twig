@@ -1,0 +1,47 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Job Listings{% endblock %}
+
+{% block body %}
+    <h1>Job Listings</h1>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#addJobModal">Create new</button>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Listing Name</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Job Type</th>
+                <th>Experience Level</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job_listing in job_listings %}
+                <tr>
+                    <td>{{ job_listing.ListingName }}</td>
+                    <td>{{ job_listing.Title }}</td>
+                    <td>{{ job_listing.Location }}</td>
+                    <td>{{ job_listing.JobType.value }}</td>
+                    <td>{{ job_listing.ExperienceLevel.value }}</td>
+                    <td>{{ job_listing.Status.value }}</td>
+                    <td>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#editJobModal{{ job_listing.id }}">Edit</button>
+                        {{ include('job_listing/_delete_form.html.twig') }}
+                        <a href="{{ path('job_listing_applications', { id: job_listing.id }) }}" class="btn btn-info">View Applications</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ include('job_listing/_add_modal.html.twig') }}
+    {% for job_listing in job_listings %}
+        {{ include('job_listing/_edit_modal.html.twig', { job_listing: job_listing }) }}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}Conversation with {{ other_user.username }}{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="{{ path('app_messenger_index') }}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Back to conversations</a>
+    </div>
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Conversation with {{ other_user.username }}</h4>
+        </div>
+        <div class="card-body chat-container" style="max-height: 400px; overflow-y: auto;">
+            {% if messages|length > 0 %}
+                {% for message in messages %}
+                    <div class="mb-3 {% if message.sender == app.user %}text-end{% endif %}">
+                        <div class="card d-inline-block {% if message.sender == app.user %}bg-primary text-white{% else %}bg-light{% endif %}" style="max-width: 75%;">
+                            <div class="card-body py-2 px-3">
+                                <p class="card-text mb-1">{{ message.content|nl2br }}</p>
+                                <small class="{% if message.sender == app.user %}text-white-50{% else %}text-muted{% endif %}">{{ message.sentAt|date('M d, H:i') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="text-center text-muted my-4">
+                    <p>No messages yet. Start the conversation!</p>
+                </div>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            {{ form_start(form) }}
+            <div class="input-group">
+                {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 2}}) }}
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

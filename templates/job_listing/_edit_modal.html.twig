@@ -1,0 +1,46 @@
+<div class="modal fade" id="editJobModal{{ job_listing.id }}" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel{{ job_listing.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editJobModalLabel{{ job_listing.id }}">Edit Job Listing</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(edit_forms[job_listing.id], {
+                    'action': path('job_listing_edit', {'id': job_listing.id}),
+                    'attr': { 'class': 'needs-validation', 'novalidate': 'novalidate' }
+                }) }}                <div class="form-group">
+                    {{ form_label(edit_forms[job_listing.id].ListingName, 'Listing Name', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(edit_forms[job_listing.id].ListingName, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_forms[job_listing.id].Title, 'Title', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(edit_forms[job_listing.id].Title, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_forms[job_listing.id].Location, 'Location', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(edit_forms[job_listing.id].Location, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_forms[job_listing.id].JobType, 'Job Type', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(edit_forms[job_listing.id].JobType, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_forms[job_listing.id].ExperienceLevel, 'Experience Level', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(edit_forms[job_listing.id].ExperienceLevel, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(edit_forms[job_listing.id].Status, 'Status', { 'label_attr': { 'class': 'form-label' } }) }}
+                    {{ form_widget(edit_forms[job_listing.id].Status, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                {{ form_end(edit_forms[job_listing.id]) }}
+            </div>
+        </div>
+    </div>
+</div>

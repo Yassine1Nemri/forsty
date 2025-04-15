@@ -1,0 +1,34 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Applications for {{ job.Title }}{% endblock %}
+
+{% block body %}
+    <h1>Applications for {{ job.Title }}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Cover Letter</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+                <tr>
+                    <td>{{ application.user.name }}</td>
+                    <td>{{ application.coverLetter }}</td>
+                    <td>{{ application.status }}</td>
+                    <td>
+                        <a href="{{ path('application_accept', {'id': application.id}) }}" class="btn btn-success">Accept</a>
+                        <a href="{{ path('application_reject', {'id': application.id}) }}" class="btn btn-danger">Reject</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No applications found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

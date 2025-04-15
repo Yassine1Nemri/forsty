@@ -1,0 +1,36 @@
+{% extends 'client/index.html.twig' %}
+
+{% block title %}Job Listing{% endblock %}
+
+{% block body %}
+    <h1>Job Listing</h1>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Listing Name</th>
+                <td>{{ job_listing.ListingName }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ job_listing.Title }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ job_listing.Location }}</td>
+            </tr>
+            <tr>
+                <th>Job Type</th>
+                <td>{{ job_listing.JobType.value }}</td>
+            </tr>
+            <tr>
+                <th>Experience Level</th>
+                <td>{{ job_listing.ExperienceLevel.value }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ job_listing.Status.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('job_listing_index') }}" class="btn btn-info">Back to list</a>
+{% endblock %}
